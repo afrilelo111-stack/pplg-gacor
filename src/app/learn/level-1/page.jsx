@@ -144,16 +144,60 @@ export default function LevelOneSection() {
         </div>
 
         {/* Hint Box */}
-        <div className="mt-8 p-6 bg-slate-900 rounded-[2rem] flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden relative">
+        <div className="mt-6 p-6 bg-slate-900 rounded-[2rem] flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden relative">
+          <div className="flex items-center gap-4 relative z-10">
+              <span className="text-2xl">👤</span>
+              <p className="text-slate-400 text-sm italic">
+                <b>Challenge 1:</b> Ubah tulisan <code>Stranger</code> jadi namamu. Jangan lupa tambahkan tag <code>&lt;u&gt;</code> di awal nama agar namamu punya garis bawah yang keren!
+              </p>
+          </div>
+          <div className="absolute right-0 top-0 opacity-10 text-white font-black text-7xl select-none leading-none -translate-y-2 translate-x-4 uppercase">
+              Identity
+          </div>
+        </div>
+        <div className="mt-6 p-6 bg-pink-950 border border-pink-500/30 rounded-[2rem] flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden relative shadow-lg shadow-pink-500/5">
             <div className="flex items-center gap-4 relative z-10">
-                <span className="text-2xl">💡</span>
-                <p className="text-slate-400 text-sm italic">
-                  <b>Psst!</b> Kamu bisa menggunakan class Tailwind seperti <code>animate-spin</code> atau <code>rounded-full</code> juga lho!
+                <span className="text-2xl">🎨</span>
+                <p className="text-pink-100 text-sm italic leading-relaxed">
+                  <b>Challenge 2:</b> Bosen sama warna biru? Coba ganti <code>bg-blue-600</code> menjadi <code>bg-pink-500</code> atau <code>bg-emerald-500</code>. Lihat gimana auranya langsung berubah!
                 </p>
             </div>
-            <div className="absolute right-0 top-0 opacity-10 text-white font-black text-7xl select-none leading-none -translate-y-2 translate-x-4">
-                CODE
+            <div className="absolute right-0 top-0 opacity-10 text-white font-black text-7xl select-none leading-none -translate-y-2 translate-x-4 uppercase">
+                Vibe
             </div>
+        </div>
+        <div className="mt-6 p-6 bg-slate-900 rounded-[2rem] flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden relative">
+          <div className="flex items-center gap-4 relative z-10">
+              <span className="text-2xl">⚪</span>
+              <p className="text-slate-400 text-sm italic">
+                <b>Challenge 3:</b> Kotak itu membosankan! Tambahkan class <code>rounded-full</code> pada button untuk mengubahnya menjadi bulat sempurna yang estetik.
+              </p>
+          </div>
+          <div className="absolute right-0 top-0 opacity-10 text-white font-black text-7xl select-none leading-none -translate-y-2 translate-x-4 uppercase">
+              Shape
+          </div>
+        </div>
+        <div className="mt-6 p-6 bg-indigo-950 border border-indigo-500/30 rounded-[2rem] flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden relative shadow-lg shadow-indigo-500/5">
+            <div className="flex items-center gap-4 relative z-10">
+                <span className="text-2xl">👻</span>
+                <p className="text-indigo-50 text-sm italic leading-relaxed">
+                  <b>Challenge 4:</b> Buat teksmu jadi misterius. Tambahkan <code>opacity: 0.5;</code> di dalam atribut style tag P. Teksnya bakal jadi transparan kayak hantu!
+                </p>
+            </div>
+            <div className="absolute right-0 top-0 opacity-10 text-white font-black text-7xl select-none leading-none -translate-y-2 translate-x-4 uppercase">
+                Ghost
+            </div>
+        </div>
+        <div className="mt-6 p-6 bg-blue-600 rounded-[2rem] flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden relative shadow-xl shadow-blue-500/20">
+          <div className="flex items-center gap-4 relative z-10">
+              <span className="text-2xl animate-bounce">⚡</span>
+              <p className="text-white text-sm italic">
+                <b>Final Mission:</b> Kasih nyawa ke tombolmu! Tambahkan class <code>animate-bounce</code>. Kalau tombolnya sudah melompat, selamat! Kamu sudah resmi jadi calon developer!
+              </p>
+          </div>
+          <div className="absolute right-0 top-0 opacity-20 text-white font-black text-7xl select-none leading-none -translate-y-2 translate-x-4 uppercase">
+              Alive
+          </div>
         </div>
       </div>
     </section>
