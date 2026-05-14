@@ -2,8 +2,7 @@
 import { useState, useRef, useEffect } from "react";
 
 export default function LevelOneSection() {
-  // Kode awal sengaja dibuat agak berantakan untuk diperbaiki
-  const [code, setCode] = useState(`<h1 class="text-red-500 font-black text-5xl">
+  const [code, setCode] = useState(`<h1 class="text-red-500 font-black text-3xl md:text-5xl">
   Belajar PPLG
 </h1>
 
@@ -17,38 +16,9 @@ export default function LevelOneSection() {
 
   const iframeRef = useRef(null);
 
-  // Deteksi tantangan secara cerdas
   const isMission1Done = code.includes("text-emerald-500");
   const isMission2Done = code.includes("background: #ffd700") || code.includes("background:#ffd700");
   const isMission3Done = code.includes("animate-bounce");
-
-  const handleUpdate = () => {
-    const iframe = iframeRef.current;
-    if (iframe) {
-      const document = iframe.contentDocument;
-      document.open();
-      // Suntikkan Tailwind Play CDN agar user bisa pakai class Tailwind di editor!
-      document.write(`
-        <script src="https://cdn.tailwindcss.com"></script>
-        <style>
-          @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;800&display=swap');
-          body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            padding: 40px; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
-            min-height: 90vh; 
-            margin: 0; 
-            text-align: center;
-          }
-        </style>
-        ${code}
-      `);
-      document.close();
-    }
-  };
 
   useEffect(() => {
     const iframe = iframeRef.current;
@@ -61,12 +31,12 @@ export default function LevelOneSection() {
           @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;800&display=swap');
           body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
-            padding: 40px; 
+            padding: 20px; 
             display: flex; 
             flex-direction: column; 
             align-items: center; 
             justify-content: center; 
-            min-height: 90vh; 
+            min-height: 80vh; 
             margin: 0; 
             text-align: center;
           }
@@ -78,71 +48,72 @@ export default function LevelOneSection() {
   }, [code]);
 
   return (
-    <section className="py-24 bg-white relative">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="py-12 md:py-24 bg-white relative">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
         
-        {/* Header Lab */}
-        <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-6">
+        {/* Header Lab - Stack on Mobile */}
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 gap-6">
           <div>
-            <h2 className="text-4xl font-black text-slate-900 tracking-tighter">
+            <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tighter">
               Fix The <span className="text-blue-600">Broken Code</span>
             </h2>
-            <p className="text-slate-500 mt-2">Selesaikan 3 tantangan di bawah ini untuk melihat keajaiban.</p>
+            <p className="text-slate-500 mt-2 text-sm md:text-base">Selesaikan tantangan di bawah ini untuk melihat keajaiban.</p>
           </div>
 
-          {/* Real-time Task Status */}
-          <div className="flex gap-2">
+          {/* Real-time Task Status - Wrap on Mobile */}
+          <div className="flex flex-wrap gap-2">
             {[
               { done: isMission1Done, label: "Color" },
               { done: isMission2Done, label: "Gold Style" },
               { done: isMission3Done, label: "Animation" }
             ].map((task, i) => (
-              <div key={i} className={`px-4 py-2 rounded-2xl border text-[10px] font-black uppercase tracking-widest transition-all ${task.done ? 'bg-emerald-500 border-emerald-500 text-white shadow-lg shadow-emerald-200' : 'bg-white border-slate-200 text-slate-400'}`}>
+              <div key={i} className={`px-3 py-1.5 md:px-4 md:py-2 rounded-xl border text-[9px] md:text-[10px] font-black uppercase tracking-widest transition-all ${task.done ? 'bg-emerald-500 border-emerald-500 text-white shadow-lg shadow-emerald-200' : 'bg-white border-slate-200 text-slate-400'}`}>
                 {task.done ? '✓ ' : ''}{task.label}
               </div>
             ))}
           </div>
         </div>
 
-        {/* Editor & Preview */}
-        <div className="grid lg:grid-cols-2 gap-px bg-slate-200 rounded-[3rem] overflow-hidden shadow-2xl border border-slate-200">
+        {/* Editor & Preview Container - Grid to 1 Column on Mobile */}
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-px bg-slate-200 rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl border border-slate-200">
           
           {/* EDITOR */}
-          <div className="bg-[#0f172a] flex flex-col">
-            <div className="px-8 py-4 bg-[#1e293b]/50 border-b border-slate-800/50 flex justify-between">
-              <span className="text-blue-400 font-mono text-xs font-bold tracking-widest">LAB_EDITOR.EXE</span>
+          <div className="bg-[#0f172a] flex flex-col order-1">
+            <div className="px-6 py-3 md:px-8 md:py-4 bg-[#1e293b]/50 border-b border-slate-800/50 flex justify-between items-center">
+              <span className="text-blue-400 font-mono text-[10px] md:text-xs font-bold tracking-widest">EDITOR</span>
               <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
             </div>
             <textarea
               value={code}
               onChange={(e) => setCode(e.target.value)}
-              className="w-full h-[500px] p-10 bg-transparent text-blue-100 font-mono text-sm leading-relaxed outline-none resize-none caret-white"
+              className="w-full h-[300px] md:h-[450px] lg:h-[500px] p-6 md:p-10 bg-transparent text-blue-100 font-mono text-xs md:text-sm leading-relaxed outline-none resize-none caret-white"
               spellCheck="false"
             />
           </div>
 
           {/* PREVIEW */}
-          <div className="bg-white flex flex-col relative">
-             {/* Overlay Success */}
+          <div className="bg-white flex flex-col relative order-2 min-h-[300px]">
              {isMission1Done && isMission2Done && isMission3Done && (
                <div className="absolute inset-0 bg-emerald-500/10 backdrop-blur-[2px] z-10 pointer-events-none flex items-center justify-center">
-                  <div className="bg-white px-6 py-3 rounded-2xl shadow-2xl border border-emerald-100 animate-bounce">
-                    <span className="text-emerald-600 font-black text-sm uppercase tracking-widest">✨ Mission Complete! ✨</span>
+                  <div className="bg-white px-4 py-2 md:px-6 md:py-3 rounded-xl shadow-2xl border border-emerald-100 animate-bounce">
+                    <span className="text-emerald-600 font-black text-[10px] md:text-sm uppercase tracking-widest">✨ Mission Complete! ✨</span>
                   </div>
                </div>
              )}
 
-            <div className="px-8 py-4 bg-slate-50/50 border-b border-slate-100 text-[10px] font-bold text-slate-400 tracking-[0.3em]">
+            <div className="px-6 py-3 md:px-8 md:py-4 bg-slate-50/50 border-b border-slate-100 text-[9px] md:text-[10px] font-bold text-slate-400 tracking-[0.3em]">
               RESULT_VIEWER
             </div>
             <iframe 
               ref={iframeRef}
-              className="w-full flex-grow"
+              className="w-full flex-grow min-h-[300px]"
               title="preview"
             />
           </div>
         </div>
 
+        {/* CHALLENGE CARDS - Optimized for Mobile */}
+        <div className="space-y-4 mt-8">
         {/* Hint Box */}
         <div className="mt-6 p-6 bg-slate-900 rounded-[2rem] flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden relative">
           <div className="flex items-center gap-4 relative z-10">
@@ -199,6 +170,8 @@ export default function LevelOneSection() {
               Alive
           </div>
         </div>
+        </div>
+
       </div>
     </section>
   );
