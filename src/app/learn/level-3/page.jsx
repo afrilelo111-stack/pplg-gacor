@@ -118,7 +118,7 @@ if(mysqli_query($db, $query)) {
                     placeholder="Ketik Nama Siswa..."
                     value={inputName}
                     onChange={(e) => setInputName(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:ring-4 focus:ring-indigo-500/10 transition-all"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:ring-4 focus:ring-indigo-500/10 transition-all text-black"
                   />
                   <button className="w-full bg-indigo-600 text-white py-4 rounded-2xl font-black shadow-xl shadow-indigo-200 hover:bg-indigo-700 active:scale-[0.98] transition-all">
                     DAFTARKAN KE DATABASE
