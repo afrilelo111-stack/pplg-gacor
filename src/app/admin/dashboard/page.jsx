@@ -7,8 +7,6 @@ import Navbar from "../components/Navbar";
 import MobileNav from "../components/MobileNav";
 
 import DashboardClient from "./DashboardClient";
-import KomentarAdminClient from "../komentar/KomentarAdminClient";
-
 import {
   LayoutDashboard,
   ShieldCheck,
@@ -214,7 +212,7 @@ export default async function DashboardPage() {
 
                 </div>
 
-                <KomentarAdminClient />
+                
 
               </div>
 
