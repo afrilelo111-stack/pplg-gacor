@@ -2,9 +2,9 @@
 
 import {
   House,
-  CircleDollarSign,
-  Grid2x2,
-  MessageCircle,
+  BriefcaseBusiness, // Diganti: Lebih cocok untuk Projects / Portofolio
+  Milestone,         // Diganti: Lebih cocok untuk penunjuk arah / Roadmap
+  User,              // Diganti: Lebih cocok untuk profil / Tentang Kami (About)
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -83,7 +83,7 @@ export default function MobileNav() {
       <NavItem 
         href="#Projects" 
         id="Projects" 
-        icon={<CircleDollarSign size={22} />} 
+        icon={<BriefcaseBusiness size={22} />} 
         label="Projects" 
         activeTab={activeTab} 
         className={navItemClass("Projects")} 
@@ -91,19 +91,19 @@ export default function MobileNav() {
       <NavItem 
         href="#Roadmap" 
         id="Roadmap" 
-        icon={<Grid2x2 size={22} />} 
+        icon={<Milestone size={22} />} 
         label="Roadmap" 
         activeTab={activeTab} 
         className={navItemClass("Roadmap")} 
       />
-      { <NavItem 
-        href="#contact" 
-        id="contact" 
-        icon={<MessageCircle size={22} />} 
-        label="Chat" 
+      <NavItem 
+        href="#About" 
+        id="About" 
+        icon={<User size={22} />} 
+        label="About" 
         activeTab={activeTab} 
-        className={navItemClass("contact")} 
-      /> }
+        className={navItemClass("About")} 
+      />
     </div>
   );
 }
