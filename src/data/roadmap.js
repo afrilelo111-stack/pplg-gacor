@@ -9,29 +9,22 @@ export const roadmap = [
   {
     level: "Level 2",
     title: "JavaScript",
-    topics: ["JavaScript Syntax", "DOM Manipulation"],
+    topics: ["Syntax dasar JavaScript"],
     description: "Make websites interactive and dynamic.",
-    //link: "/learn/level-2"
+    link: "/learn/level-2"
   },
   {
     level: "Level 3",
-    title: "React & Next.js",
-    topics: ["React Fundamentals", "Next.js Basics"],
-    description: "Build modern and scalable web applications.",
+    title: "Backend Development",
+    topics: ["PHP", "Databases"],
+    description: "Understand databases, APIs, and server logic.",
     //link: "/learn/level-3"
   },
   {
     level: "Level 4",
-    title: "Backend Development",
-    topics: ["PHP", "Laravel", "Databases"],
-    description: "Understand databases, APIs, and server logic.",
-    //link: "/learn/level-4"
-  },
-  {
-    level: "Level 5",
     title: "Cybersecurity & AI",
     topics: ["Cybersecurity Basics", "AI Fundamentals"],
     description: "Explore advanced technology and digital security.",
-    //link: "/learn/level-5"
+    //link: "/learn/level-4"
   },
 ];
