@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import RoadmapSection from "@/components/sections/RoadmapSection";
 import MobileNav from "@/components/MobileNav";
+import Komentar from "@/components/sections/Komentar";
 
 export default function HomePage() {
   return (
@@ -26,6 +27,8 @@ export default function HomePage() {
       <ProjectsSection />
 
       <RoadmapSection />
+
+      <Komentar />
 
       <Footer />
     </main>

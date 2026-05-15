@@ -17,8 +17,8 @@ const increase = () => {
 };
 
 const decrease = () => {
-  // Challenge 3: Ganti tanda + menjadi * (kali)
-  setCount(prev => prev + 1); 
+  // Challenge 3: Ganti tanda - menjadi * (kali)
+  setCount(prev => prev - 1); 
 };`);
 
   // Menjalankan kode dari editor secara aman
