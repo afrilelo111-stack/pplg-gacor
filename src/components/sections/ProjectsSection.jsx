@@ -3,7 +3,7 @@ import ProjectCard from "../ui/ProjectCard";
 
 export default function ProjectsSection() {
   return (
-    <section className="py-32 bg-white relative overflow-hidden" id="projects">
+    <section className="py-32 bg-white relative overflow-hidden" id="Projects">
       {/* Background Decor - Membuat section ini tidak kaku */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
       

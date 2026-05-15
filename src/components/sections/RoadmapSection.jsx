@@ -3,7 +3,7 @@ import RoadmapCard from "../ui/RoadmapCard";
 
 export default function RoadmapSection() {
   return (
-    <section className="py-32 bg-white relative overflow-hidden" id="roadmap">
+    <section className="py-32 bg-white relative overflow-hidden" id="Roadmap">
       {/* Dekorasi Background agar tidak hambar */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-50/50 blur-[120px] rounded-full -z-10" />
       
