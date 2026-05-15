@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import RoadmapSection from "@/components/sections/RoadmapSection";
+import MobileNav from "@/components/MobileNav";
 
 export default function HomePage() {
   return (
@@ -14,6 +15,7 @@ export default function HomePage() {
       </div>
 
       <Navbar />
+      <MobileNav />
       
       {/* Container untuk konten utama agar konsisten */}
       <div className="relative z-10">
