@@ -18,7 +18,7 @@ export default function Navbar() {
         {/* Desktop Menu */}
         <ul className="hidden md:flex gap-8 text-gray-700 font-medium">
           <li>
-            <a href="#" className="hover:text-blue-600 transition">
+            <a href="#Home" className="hover:text-blue-600 transition">
               Home
             </a>
           </li>
@@ -64,7 +64,7 @@ export default function Navbar() {
         <div className="md:hidden border-t border-gray-200 bg-white px-6 py-5 space-y-4">
 
           <a
-            href="#"
+            href="#Home"
             className="block hover:text-blue-600"
           >
             Home
@@ -91,13 +91,13 @@ export default function Navbar() {
             About
           </a>
 
-          <a
+          {/* <a
             href="https://wa.me/6281234567890"
             target="_blank"
             className="block bg-blue-600 text-white text-center py-3 rounded-xl"
           >
             Contact
-          </a>
+          </a> */}
         </div>
       )}
     </nav>

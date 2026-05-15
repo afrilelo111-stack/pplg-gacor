@@ -27,11 +27,11 @@ export default function MobileNav() {
       lastScroll = currentScroll;
 
       // 2. Logic Scroll Spy (Deteksi Section Aktif)
-      const sections = ["home", "pricing", "apps", "contact"];
+      const sections = ["Home", "Projects", "Roadmap", "About"];
       
       // Jika di paling atas, set ke home
       if (window.scrollY < 100) {
-        setActiveTab("home");
+        setActiveTab("Home");
         return;
       }
 
@@ -96,14 +96,14 @@ export default function MobileNav() {
         activeTab={activeTab} 
         className={navItemClass("Roadmap")} 
       />
-      {/* <NavItem 
+      { <NavItem 
         href="#contact" 
         id="contact" 
         icon={<MessageCircle size={22} />} 
         label="Chat" 
         activeTab={activeTab} 
         className={navItemClass("contact")} 
-      /> */}
+      /> }
     </div>
   );
 }
