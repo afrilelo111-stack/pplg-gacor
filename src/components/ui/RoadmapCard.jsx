@@ -37,7 +37,7 @@ export default function RoadmapCard({ item, index }) {
 
         {/* Mini Topics List - Dibuat seperti "Checklist" */}
         <div className="space-y-4 mb-10">
-          <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Kurikulum Utama:</p>
+          <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Materi Utama:</p>
           <div className="flex flex-col gap-2.5">
             {topics.map((topic, idx) => (
               <div 
@@ -60,7 +60,7 @@ export default function RoadmapCard({ item, index }) {
           href={roadmapLink}
           className="group/btn relative flex items-center justify-between w-full p-1 bg-slate-900 rounded-2xl overflow-hidden transition-all hover:bg-blue-600 active:scale-95 shadow-xl shadow-slate-900/10"
         >
-          <span className="pl-6 py-3 text-white font-bold text-sm">Lihat Kurikulum</span>
+          <span className="pl-6 py-3 text-white font-bold text-sm">Lihat</span>
           <div className="mr-1 w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center text-white group-hover/btn:bg-white group-hover/btn:text-blue-600 transition-all">
             <svg 
               xmlns="http://www.w3.org/2000/svg" 

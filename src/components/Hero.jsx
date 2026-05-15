@@ -3,7 +3,7 @@ import TerminalCard from "./TerminalCard";
 
 export default function Hero() {
   return (
-    <section className="relative max-w-7xl mx-auto px-6 pt-32 pb-32 grid lg:grid-cols-2 gap-16 items-center">
+    <section className="relative max-w-7xl mx-auto px-6 pt-32 pb-32 grid lg:grid-cols-2 gap-16 items-center" id="hero">
       
       {/* Sisi Kiri (Konten) */}
       <div className="relative z-10">

@@ -2,7 +2,7 @@ export const roadmap = [
   {
     level: "Level 1",
     title: "HTML & CSS",
-    topics: ["HTML Basics", "CSS Fundamentals", "Responsive Design"],
+    topics: ["HTML Basics", "CSS Fundamentals"],
     description: "Learn how websites are structured and styled.",
     link: "/learn/level-1"
   },
@@ -18,7 +18,7 @@ export const roadmap = [
     title: "Backend Development",
     topics: ["PHP", "Databases"],
     description: "Understand databases, APIs, and server logic.",
-    //link: "/learn/level-3"
+    link: "/learn/level-3"
   },
   {
     level: "Level 4",
