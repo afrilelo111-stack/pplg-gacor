@@ -2,15 +2,16 @@
 
 import {
   House,
-  BriefcaseBusiness, // Diganti: Lebih cocok untuk Projects / Portofolio
-  Milestone,         // Diganti: Lebih cocok untuk penunjuk arah / Roadmap
-  User,              // Diganti: Lebih cocok untuk profil / Tentang Kami (About)
+  BriefcaseBusiness,
+  Milestone,
+  User,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function MobileNav() {
   const [show, setShow] = useState(true);
-  const [activeTab, setActiveTab] = useState("home");
+  const [activeTab, setActiveTab] = useState("Home"); // Disamakan kapitalnya
 
   useEffect(() => {
     let lastScroll = 0;
@@ -29,7 +30,6 @@ export default function MobileNav() {
       // 2. Logic Scroll Spy (Deteksi Section Aktif)
       const sections = ["Home", "Projects", "Roadmap", "About"];
       
-      // Jika di paling atas, set ke home
       if (window.scrollY < 100) {
         setActiveTab("Home");
         return;
@@ -39,7 +39,6 @@ export default function MobileNav() {
         const element = document.getElementById(id);
         if (element) {
           const rect = element.getBoundingClientRect();
-          // Jika section berada di area viewport tengah
           if (rect.top <= 200 && rect.bottom >= 200) {
             setActiveTab(id);
           }
@@ -51,71 +50,80 @@ export default function MobileNav() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Helper untuk styling link
-  const navItemClass = (id) => `
-    flex flex-col items-center gap-1 transition-all duration-500 relative
-    ${activeTab === id ? "text-blue-600 scale-110" : "text-gray-400 hover:text-gray-600"}
-  `;
-
   return (
-    <div
-      className={`
-        md:hidden fixed left-1/2 -translate-x-1/2 z-50
-        bg-white/80 backdrop-blur-xl border border-gray-100
-        shadow-[0_20px_50px_rgba(0,0,0,0.1)] rounded-[2.5rem]
-        px-8 py-4 flex gap-8 transition-all duration-500 ease-in-out
-        ${show ? "bottom-6 opacity-100" : "-bottom-32 opacity-0"}
-      `}
-    >
-      {/* Indicator Bar - Animasi background kecil di bawah ikon aktif */}
-      <div className="absolute inset-0 flex gap-8 px-8 pointer-events-none">
-          {/* Ini hanya pemanis agar perpindahan terasa lebih premium */}
-      </div>
-
-      <NavItem 
-        href="#" 
-        id="home" 
-        icon={<House size={22} />} 
-        label="Home" 
-        activeTab={activeTab} 
-        className={navItemClass("home")} 
-      />
-      <NavItem 
-        href="#Projects" 
-        id="Projects" 
-        icon={<BriefcaseBusiness size={22} />} 
-        label="Projects" 
-        activeTab={activeTab} 
-        className={navItemClass("Projects")} 
-      />
-      <NavItem 
-        href="#Roadmap" 
-        id="Roadmap" 
-        icon={<Milestone size={22} />} 
-        label="Roadmap" 
-        activeTab={activeTab} 
-        className={navItemClass("Roadmap")} 
-      />
-      <NavItem 
-        href="#About" 
-        id="About" 
-        icon={<User size={22} />} 
-        label="About" 
-        activeTab={activeTab} 
-        className={navItemClass("About")} 
-      />
-    </div>
+    <AnimatePresence>
+      {show && (
+        <motion.div
+          // Efek masuk pertama kali & sembunyi saat scroll
+          initial={{ y: 100, x: "-50%", opacity: 0 }}
+          animate={{ y: 0, x: "-50%", opacity: 1 }}
+          exit={{ y: 100, x: "-50%", opacity: 0 }}
+          transition={{ type: "spring", stiffness: 260, damping: 30 }}
+          className="md:hidden fixed left-1/2 z-50 bottom-6 bg-white/80 backdrop-blur-xl border border-gray-100 shadow-[0_20px_50px_rgba(0,0,0,0.1)] rounded-[2.5rem] px-7 py-3.5 flex gap-7 text-gray-400"
+        >
+          <NavItem 
+            href="#Home" 
+            id="Home" 
+            icon={<House size={20} />} 
+            label="Home" 
+            activeTab={activeTab} 
+            setActiveTab={setActiveTab}
+          />
+          <NavItem 
+            href="#Projects" 
+            id="Projects" 
+            icon={<BriefcaseBusiness size={20} />} 
+            label="Projects" 
+            activeTab={activeTab} 
+            setActiveTab={setActiveTab}
+          />
+          <NavItem 
+            href="#Roadmap" 
+            id="Roadmap" 
+            icon={<Milestone size={20} />} 
+            label="Roadmap" 
+            activeTab={activeTab} 
+            setActiveTab={setActiveTab}
+          />
+          <NavItem 
+            href="#About" 
+            id="About" 
+            icon={<User size={20} />} 
+            label="About" 
+            activeTab={activeTab} 
+            setActiveTab={setActiveTab}
+          />
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 
-// Komponen Kecil untuk Item Navigasi agar kode lebih bersih
-function NavItem({ href, id, icon, label, activeTab, className }) {
+function NavItem({ href, id, icon, label, activeTab, setActiveTab }) {
+  const isActive = activeTab === id;
+
   return (
-    <a href={href} className={className}>
-      {icon}
-      <span className="text-[10px] font-bold uppercase tracking-wider">{label}</span>
-      {activeTab === id && (
-        <span className="absolute -bottom-1 w-1 h-1 bg-blue-600 rounded-full animate-pulse" />
+    <a 
+      href={href} 
+      onClick={() => setActiveTab(id)}
+      className={`flex flex-col items-center gap-1 relative py-1 px-2 select-none transition-colors duration-300 ${
+        isActive ? "text-blue-600 font-bold" : "hover:text-gray-600"
+      }`}
+    >
+      {/* Efek ikon membesar sedikit saat aktif */}
+      <motion.div animate={{ scale: isActive ? 1.1 : 1 }} transition={{ duration: 0.2 }}>
+        {icon}
+      </motion.div>
+      
+      <span className="text-[9px] font-bold uppercase tracking-wider">{label}</span>
+      
+      {/* ─── ANIMASI INDIKATOR SELIDIK (Sliding Pill) ─── */}
+      {isActive && (
+        <motion.span 
+          layoutId="activeGlow" // Kunci magis framer motion agar komponen meluncur halus
+          transition={{ type: "spring", stiffness: 380, damping: 30 }}
+          className="absolute bottom-0 w-5 h-1 bg-blue-600 rounded-full" 
+        />
       )}
     </a>
   );

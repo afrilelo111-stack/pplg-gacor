@@ -1,10 +1,10 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 
 import { useState, useRef } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { submitComment } from './actions';
 import { MessageSquare, User, Mail, Send, Calendar, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function Komentar() {
   const supabase = createClient();
@@ -14,7 +14,7 @@ export default function Komentar() {
   const [message, setMessage] = useState(null);
   const [komentarList, setKomentarList] = useState([]);
 
-  // ─── AMBIL DATA AWAL (Aman dari Loop & Error VS Code) ───
+  // ─── AMBIL DATA AWAL ───
   if (typeof window !== 'undefined' && komentarList.length === 0 && !isSubmitting) {
     setTimeout(async () => {
       const { data, error } = await supabase
@@ -54,37 +54,75 @@ export default function Komentar() {
     return name ? name.charAt(0).toUpperCase() : '?';
   };
 
+  // ─── KONFIGURASI ANIMASI STAGGERED (PARENT) ───
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15, // Jeda antrean elemen anak
+      },
+    },
+  };
+
+  // ─── KONFIGURASI ANIMASI ELEMEN ANAK (CHILD) ───
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.7,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    },
+  };
+
   return (
-    <div className="max-w-3xl mx-auto my-16 px-4 sm:px-6 text-slate-800">
+    // Pemicu Scroll menggunakan motion.div wrapper utama
+    <motion.div 
+      className="max-w-3xl mx-auto my-16 px-4 sm:px-6 text-slate-800"
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+    >
       
-      {/* ─── BAGIAN PENANDA & JUDUL BESAR (Mirip "Start Small. Build Big.") ─── */}
+      {/* ─── HEADER JUDUL (Terpemicu Berurutan) ─── */}
       <div className="text-center mb-12 space-y-3">
-        {/* Badge Pill Kecil */}
-        <span className="inline-block bg-slate-100 text-slate-500 text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full border border-slate-200/40 select-none">
-          Hububungan Komunitas
-        </span>
+        <motion.span 
+          variants={itemVariants}
+          className="inline-block bg-slate-100 text-slate-500 text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full border border-slate-200/40 select-none"
+        >
+          Hubungan Komunitas
+        </motion.span>
         
-        {/* Teks Judul Besar & Tebal dengan Gradasi Warna */}
-        <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-slate-900 leading-tight">
+        <motion.h1 
+          variants={itemVariants}
+          className="text-4xl sm:text-5xl font-black tracking-tight text-slate-900 leading-tight"
+        >
           Suarakan Pikiran. <br />
           <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
             Bagikan Diskusi.
           </span>
-        </h1>
+        </motion.h1>
         
-        {/* Sub-judul Deskripsi Kecil */}
-        <p className="text-sm text-slate-500 max-w-md mx-auto font-medium">
+        <motion.p 
+          variants={itemVariants}
+          className="text-sm text-slate-500 max-w-md mx-auto font-medium"
+        >
           Tinggalkan pesan, pertanyaan, atau masukan berharga Anda untuk membangun ruang belajar yang lebih interaktif.
-        </p>
+        </motion.p>
       </div>
 
-      {/* ─── CONTAINER UTAMA (KOTAK PUTIH KONTRAST) ─── */}
-      <div className="relative overflow-hidden rounded-[2.5rem] border border-slate-100 bg-white shadow-[0_32px_64px_-20px_rgba(0,0,0,0.06)] p-6 md:p-10">
-        
-        {/* Dekorasi Pendaran Cahaya Lembut Internal */}
+      {/* ─── CONTAINER BOX UTAMA KOTAK PUTIH ─── */}
+      <motion.div 
+        variants={itemVariants}
+        className="relative overflow-hidden rounded-[2.5rem] border border-slate-100 bg-white shadow-[0_32px_64px_-20px_rgba(0,0,0,0.06)] p-6 md:p-10"
+      >
         <div className="absolute -top-24 -right-24 w-72 h-72 bg-indigo-500/5 blur-3xl rounded-full pointer-events-none" />
 
-        {/* --- HEADER INTERNAL BOX --- */}
+        {/* HEADER INTERNAL BOX */}
         <div className="relative z-10 flex items-center gap-3 mb-8 border-b border-slate-100 pb-5">
           <div className="p-2.5 bg-indigo-50 text-indigo-600 rounded-2xl border border-indigo-100/50">
             <MessageSquare size={22} />
@@ -97,7 +135,7 @@ export default function Komentar() {
           </div>
         </div>
 
-        {/* --- FORM KOMENTAR --- */}
+        {/* ─── FORM KOMENTAR INTI ─── */}
         <form 
           ref={formRef} 
           onSubmit={handleSubmit} 
@@ -108,7 +146,6 @@ export default function Komentar() {
           </h3>
           
           <div className="grid sm:grid-cols-2 gap-4 mb-4">
-            {/* INPUT NAMA */}
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-slate-600 pl-1">Nama Lengkap <span className="text-rose-500">*</span></label>
               <div className="relative group">
@@ -125,7 +162,6 @@ export default function Komentar() {
               </div>
             </div>
 
-            {/* INPUT EMAIL */}
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-slate-600 pl-1">Email <span className="text-slate-400 font-normal">(Opsional)</span></label>
               <div className="relative group">
@@ -142,7 +178,6 @@ export default function Komentar() {
             </div>
           </div>
 
-          {/* INPUT ISI KOMENTAR */}
           <div className="mb-5 space-y-1.5">
             <label className="text-xs font-bold text-slate-600 pl-1">Pesan Komentar <span className="text-rose-500">*</span></label>
             <textarea
@@ -154,23 +189,28 @@ export default function Komentar() {
             />
           </div>
 
-          {/* NOTIFIKASI BALIKAN STATUS */}
           {message && (
-            <div className={`mb-4 flex items-center gap-2.5 p-3.5 rounded-xl text-xs font-semibold animate-in fade-in slide-in-from-top-2 ${
-              message.type === 'error' 
-                ? 'bg-rose-50 border border-rose-100 text-rose-600' 
-                : 'bg-emerald-50 border border-emerald-100 text-emerald-700'
-            }`}>
+            <motion.div 
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className={`mb-4 flex items-center gap-2.5 p-3.5 rounded-xl text-xs font-semibold ${
+                message.type === 'error' 
+                  ? 'bg-rose-50 border border-rose-100 text-rose-600' 
+                  : 'bg-emerald-50 border border-emerald-100 text-emerald-700'
+              }`}
+            >
               {message.type === 'error' ? <AlertCircle size={15} /> : <CheckCircle2 size={15} />}
               <p>{message.text}</p>
-            </div>
+            </motion.div>
           )}
 
-          {/* TOMBOL SUBMIT */}
-          <button
+          {/* Efek Hover & Tap pada Tombol Kirim */}
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             type="submit"
             disabled={isSubmitting}
-            className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-black text-xs uppercase tracking-wider px-5 py-3 rounded-xl shadow-md hover:shadow-indigo-100 active:scale-[0.98] disabled:opacity-50 transition-all cursor-pointer"
+            className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-black text-xs uppercase tracking-wider px-5 py-3 rounded-xl shadow-md hover:shadow-indigo-100 disabled:opacity-50 transition-colors cursor-pointer"
           >
             {isSubmitting ? (
               <>
@@ -186,10 +226,10 @@ export default function Komentar() {
                 <span>Kirim Komentar</span>
               </>
             )}
-          </button>
+          </motion.button>
         </form>
 
-        {/* --- DAFTAR KOMENTAR --- */}
+        {/* ─── AREA DAFTAR LIST KOMENTAR ─── */}
         <div className="relative z-10 space-y-4">
           {komentarList.length === 0 ? (
             <div className="text-center py-10 bg-slate-50 border border-dashed border-slate-200 rounded-3xl p-6">
@@ -199,16 +239,19 @@ export default function Komentar() {
           ) : (
             <div className="space-y-3.5 max-h-[500px] overflow-y-auto pr-1">
               {komentarList.map((k) => (
-                <div 
+                <motion.div 
                   key={k.id} 
-                  className="bg-slate-50/80 border border-slate-100 rounded-2xl p-4 hover:bg-slate-100/70 transition-all flex gap-3.5 items-start animate-in fade-in slide-in-from-bottom-2 duration-200"
+                  // List komentar baru masuk dengan animasi pop-up lembut ke atas
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4 }}
+                  className="bg-slate-50/80 border border-slate-100 rounded-2xl p-4 hover:bg-slate-100/70 transition-all flex gap-3.5 items-start"
                 >
-                  {/* Avatar Bulat Otomatis */}
                   <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-sky-500 text-white font-black text-xs flex items-center justify-center shrink-0 shadow-sm select-none">
                     {getInitials(k.nama)}
                   </div>
 
-                  {/* Konten Utama */}
                   <div className="space-y-1 w-full min-w-0">
                     <div className="flex justify-between items-center gap-2">
                       <span className="font-bold text-slate-800 text-xs sm:text-sm truncate">{k.nama}</span>
@@ -222,13 +265,13 @@ export default function Komentar() {
                     </div>
                     <p className="text-slate-600 text-xs leading-relaxed whitespace-pre-wrap break-words font-medium">{k.isi}</p>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           )}
         </div>
 
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

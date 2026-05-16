@@ -1,3 +1,5 @@
+"use client";
+
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
@@ -5,8 +7,17 @@ import ProjectsSection from "@/components/sections/ProjectsSection";
 import RoadmapSection from "@/components/sections/RoadmapSection";
 import MobileNav from "@/components/MobileNav";
 import Komentar from "@/components/sections/Komentar";
+import { useEffect } from "react";
+import { useMusic } from "@/components/MusicProvider";
+import Link from "next/link";
 
 export default function HomePage() {
+  const { setActiveTab } = useMusic();
+
+  useEffect(() => {
+    // Ini yang memicu navbar tersembunyi
+    setActiveTab("Home");
+  }, [setActiveTab]);
   return (
     <main className="relative min-h-screen bg-white text-slate-900 selection:bg-blue-100 selection:text-blue-600">
       {/* Background Glows - Ditambah satu lagi di pojok lain agar lebih seimbang */}
