@@ -20,11 +20,11 @@ export const roadmap = [
     description: "Understand databases, APIs, and server logic.",
     link: "/learn/level-3"
   },
-  {
-    level: "Level 4",
-    title: "Cybersecurity & AI",
-    topics: ["Cybersecurity Basics", "AI Fundamentals"],
-    description: "Explore advanced technology and digital security.",
-    //link: "/learn/level-4"
-  },
+  // {
+  //   level: "Level 4",
+  //   title: "Cybersecurity & AI",
+  //   topics: ["Cybersecurity Basics", "AI Fundamentals"],
+  //   description: "Explore advanced technology and digital security.",
+  //   //link: "/learn/level-4"
+  // },
 ];

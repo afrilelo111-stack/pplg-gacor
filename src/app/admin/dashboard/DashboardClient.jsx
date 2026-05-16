@@ -8,7 +8,8 @@ import { createClient } from '@/lib/supabase/client';
 import ItemForm from '../components/ItemForm';
 import ItemCard from '../components/ItemCard';
 import { 
-  Package, 
+   
+  FileImage,
   Layers, 
   PlusCircle, 
   Edit3, 
@@ -90,11 +91,11 @@ export default function DashboardClient() {
           {/* Card Total Item */}
           <div className="bg-white border border-slate-200 p-6 rounded-3xl shadow-sm flex items-center justify-between group hover:shadow-md transition-all">
             <div className="space-y-1">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Total Produk</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Total Gambar</span>
               <h3 className="text-2xl font-black text-slate-900">{items.length} <span className="text-xs font-medium text-slate-400">Unit</span></h3>
             </div>
             <div className="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
-              <Package size={20} />
+              <FileImage size={20} />
             </div>
           </div>
 

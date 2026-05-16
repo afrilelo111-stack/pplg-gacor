@@ -1,9 +1,9 @@
-/* eslint-disable react-hooks/set-state-in-effect */
-"use client";
+'use client';
 
-import { useState, useRef, useEffect } from "react";
-import { uploadImage } from "@/lib/uploadImage";
-import { addItem, updateItem } from "@/app/admin/dashboard/actions";
+import { useState } from 'react';
+import Image from 'next/image';
+import { uploadImage } from '@/lib/uploadImage';
+import { addItem, updateItem } from '@/app/admin/dashboard/actions';
 import {
   UploadCloud,
   Image as ImageIcon,
@@ -11,7 +11,8 @@ import {
   Check,
   X,
   AlertCircle,
-} from "lucide-react";
+  Sparkles,
+} from 'lucide-react';
 
 export default function ItemForm({
   itemToEdit = null,
@@ -19,52 +20,65 @@ export default function ItemForm({
   onSuccess = () => {},
 }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [imagePreview, setImagePreview] = useState(null);
-
-  const formRef = useRef(null);
+  const [error, setError] = useState('');
+  
+  // ─── KONTROL STATE MANDIRI (MENGGANTIKAN USEEFFECT & FORM REF) ───
+  const [description, setDescription] = useState(itemToEdit?.description || '');
+  const [imagePreview, setImagePreview] = useState(itemToEdit?.image_url || null);
+  const [imageFile, setImageFile] = useState(null);
 
   const isEditing = !!itemToEdit;
 
-  useEffect(() => {
-    if (isEditing && itemToEdit?.image_url) {
-      setImagePreview(itemToEdit.image_url);
-    } else {
-      setImagePreview(null);
-      formRef.current?.reset();
+  // Jika komponen mendeteksi perubahan data 'itemToEdit' dari luar saat mode edit berganti,
+  // kita lakukan sinkronisasi langsung di fase render (Pola resmi React pengganti useEffect)
+  const currentImageUrl = itemToEdit?.image_url || null;
+  const currentDescription = itemToEdit?.description || '';
+  
+  // Trik Idem-poten: Reset/Set nilai state hanya jika referensi objek edit benar-benar berbeda
+  staticSyncPropsToState();
+  function staticSyncPropsToState() {
+    const memoKey = itemToEdit?.id || 'new-form';
+    if (ItemForm.lastFormKey !== memoKey) {
+      ItemForm.lastFormKey = memoKey;
+      // Update state secara langsung
+      if (isEditing) {
+        if (description !== currentDescription) setDescription(currentDescription);
+        if (imagePreview !== currentImageUrl) setImagePreview(currentImageUrl);
+      } else {
+        if (description !== '') setDescription('');
+        if (imagePreview !== null) setImagePreview(null);
+      }
     }
-  }, [itemToEdit, isEditing]);
+  }
 
   function handleImageChange(e) {
     const file = e.target.files[0];
-
     if (file) {
+      setImageFile(file);
       const reader = new FileReader();
-
       reader.onloadend = () => {
         setImagePreview(reader.result);
       };
-
       reader.readAsDataURL(file);
     }
   }
 
+  function resetFormLokal() {
+    setDescription('');
+    setImagePreview(null);
+    setImageFile(null);
+    setError('');
+  }
+
   async function handleSubmit(event) {
     event.preventDefault();
-
     setIsLoading(true);
-    setError("");
+    setError('');
 
-    const formData = new FormData(event.currentTarget);
+    let finalImageUrl = isEditing ? itemToEdit.image_url : null;
 
-    const imageFile = formData.get("image");
-
-    let finalImageUrl = isEditing
-      ? itemToEdit.image_url
-      : null;
-
-    // Upload image
-    if (imageFile && imageFile.size > 0) {
+    // Proses unggah gambar jika ada berkas biner baru di state
+    if (imageFile) {
       try {
         finalImageUrl = await uploadImage(imageFile);
       } catch (err) {
@@ -75,33 +89,24 @@ export default function ItemForm({
     }
 
     if (!finalImageUrl) {
-      setError("Gambar wajib diunggah.");
+      setError('Gambar sekuritas/sampul project wajib ditentukan.');
       setIsLoading(false);
       return;
     }
 
     const submitFormData = new FormData();
-
-    submitFormData.set("imageUrl", finalImageUrl);
-
-    submitFormData.set(
-      "description",
-      formData.get("description")
-    );
+    submitFormData.set('imageUrl', finalImageUrl);
+    submitFormData.set('description', description);
 
     let result;
-
     try {
       if (isEditing) {
-        result = await updateItem(
-          itemToEdit.id,
-          submitFormData
-        );
+        result = await updateItem(itemToEdit.id, submitFormData);
       } else {
         result = await addItem(submitFormData);
       }
     } catch (err) {
-      setError("Terjadi kesalahan: " + err.message);
+      setError('Terjadi kendala pada API Server: ' + err.message);
       setIsLoading(false);
       return;
     }
@@ -113,242 +118,174 @@ export default function ItemForm({
       if (onSuccess) onSuccess();
 
       if (!isEditing) {
-        formRef.current?.reset();
-        setImagePreview(null);
+        resetFormLokal();
       } else {
         onCancelEdit();
       }
-
       setIsLoading(false);
     }
   }
 
   return (
     <form
-      ref={formRef}
       onSubmit={handleSubmit}
-      className="relative overflow-hidden rounded-[2rem] border border-white/20 bg-white/70 backdrop-blur-xl shadow-[0_20px_80px_-20px_rgba(0,0,0,0.25)] p-8 md:p-10 space-y-8"
+      className="relative overflow-hidden rounded-[2rem] border border-white/40 bg-white/60 backdrop-blur-2xl shadow-[0_32px_64px_-24px_rgba(0,0,0,0.06)] p-6 md:p-10 space-y-8"
     >
-
       {/* BACKGROUND GLOW */}
-      <div className="absolute top-0 right-0 w-72 h-72 bg-indigo-500/10 blur-3xl rounded-full pointer-events-none" />
+      <div className="absolute top-0 right-0 w-80 h-80 bg-indigo-500/5 blur-3xl rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-500/5 blur-3xl rounded-full pointer-events-none" />
 
-      <div className="absolute bottom-0 left-0 w-72 h-72 bg-blue-500/10 blur-3xl rounded-full pointer-events-none" />
-
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(circle_at_1px_1px,_black_1px,_transparent_0)] bg-[size:24px_24px]" />
-
-      {/* HEADER */}
-      <div className="relative flex items-center justify-between pb-5 border-b border-slate-200/70">
-
+      {/* HEADER SECTION */}
+      <div className="relative flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
         <div className="flex items-center gap-4">
-
           <div
-            className={`relative p-4 rounded-2xl shadow-lg ${
+            className={`relative p-3.5 rounded-2xl shadow-sm transition-all duration-300 ${
               isEditing
-                ? "bg-gradient-to-br from-amber-400 to-orange-500 text-white"
-                : "bg-gradient-to-br from-indigo-500 to-blue-600 text-white"
+                ? 'bg-amber-500 text-white shadow-amber-100'
+                : 'bg-indigo-600 text-white shadow-indigo-100'
             }`}
           >
-            {isEditing ? (
-              <ImageIcon size={22} />
-            ) : (
-              <UploadCloud size={22} />
-            )}
+            {isEditing ? <ImageIcon size={20} /> : <UploadCloud size={20} />}
           </div>
 
           <div>
-            <h3 className="text-2xl font-black text-slate-900 tracking-tight">
-              {isEditing
-                ? "Edit Project"
-                : "Create New Project"}
+            <h3 className="text-lg font-black text-slate-900 tracking-tight">
+              {isEditing ? 'Modifikasi Karya Siswa' : 'Publikasikan Projek Baru'}
             </h3>
-
-            <p className="text-sm text-slate-500 mt-1">
-              Upload and manage your showcase content
+            <p className="text-xs text-slate-500 mt-0.5">
+              Formulir penayangan portofolio dan manajemen aset jurusan PPLG.
             </p>
           </div>
-
         </div>
 
+        {isEditing && (
+          <div className="self-start sm:self-center inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-700 text-[11px] font-black tracking-wide uppercase animate-pulse">
+            <Sparkles size={11} />
+            <span>Mode Edit Aktif</span>
+          </div>
+        )}
       </div>
 
-      {/* ERROR */}
+      {/* ERROR DISPLAY */}
       {error && (
-        <div className="relative flex items-center gap-3 p-4 bg-rose-50 border border-rose-100 rounded-2xl text-sm font-semibold text-rose-600 animate-in fade-in duration-300">
-
-          <div className="w-10 h-10 rounded-xl bg-rose-100 flex items-center justify-center">
-            <AlertCircle size={18} />
-          </div>
-
-          <p>{error}</p>
-
+        <div className="relative flex items-center gap-3 p-4 bg-rose-50 border border-rose-100 rounded-2xl text-xs font-semibold text-rose-700 animate-in fade-in duration-300">
+          <AlertCircle size={16} className="text-rose-500 flex-shrink-0" />
+          <p className="leading-relaxed">{error}</p>
         </div>
       )}
 
-      {/* MAIN GRID */}
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
-
-        {/* IMAGE AREA */}
-        <div className="lg:col-span-2 space-y-3">
-
-          <label className="text-xs font-bold text-slate-600 uppercase tracking-[0.2em]">
-            Project Image
+      {/* CONTENT LAYOUT */}
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+        
+        {/* LEFT COLUMN: IMAGE WORKSPACE */}
+        <div className="lg:col-span-2 space-y-2.5">
+          <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">
+            Sampul Visual Portofolio
           </label>
 
-          <div className="relative border-2 border-dashed border-indigo-200 hover:border-indigo-500 bg-gradient-to-br from-slate-50 to-indigo-50/40 rounded-3xl p-5 shadow-inner flex flex-col items-center justify-center min-h-[320px] overflow-hidden group hover:scale-[1.02] transition-all duration-300">
-
+          <div className="relative border-2 border-dashed border-slate-200/80 hover:border-indigo-500 bg-slate-50/40 rounded-3xl p-4 flex flex-col items-center justify-center min-h-[300px] overflow-hidden group/dropzone transition-all duration-300 shadow-inner">
             {imagePreview ? (
               <div className="absolute inset-0 group/preview">
-
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={imagePreview}
-                  alt="Preview"
-                  className="w-full h-full object-cover scale-105 group-hover/preview:scale-110 transition-transform duration-700"
+                  alt="Preview Konten"
+                  fill
+                  sizes="(max-w-768px) 100vw, 40vw"
+                  className="object-cover scale-100 group-hover/preview:scale-102 transition-transform duration-500"
+                  unoptimized={imagePreview.startsWith('data:')}
                 />
 
-                <div className="absolute inset-0 bg-slate-950/50 opacity-0 group-hover/preview:opacity-100 transition-all duration-300 flex flex-col items-center justify-center text-center p-6">
-
-                  <div className="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur flex items-center justify-center mb-4 border border-white/20">
-                    <UploadCloud
-                      size={28}
-                      className="text-white"
-                    />
+                <div className="absolute inset-0 bg-slate-950/60 opacity-0 group-hover/preview:opacity-100 transition-all duration-300 flex flex-col items-center justify-center text-center p-6 backdrop-blur-sm">
+                  <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-md flex items-center justify-center mb-2 border border-white/20 shadow-lg">
+                    <UploadCloud size={18} className="text-white" />
                   </div>
-
-                  <p className="text-white font-bold text-sm">
-                    Click to change image
-                  </p>
-
-                  <p className="text-slate-300 text-xs mt-1">
-                    PNG, JPG, WEBP
-                  </p>
-
+                  <p className="text-white font-bold text-xs">Ganti File Media</p>
                 </div>
               </div>
             ) : (
-              <div className="text-center relative z-10">
-
-                <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-indigo-500 to-blue-600 text-white flex items-center justify-center mx-auto shadow-xl mb-5">
-                  <UploadCloud size={36} />
+              <div className="text-center p-6 relative z-10 pointer-events-none transition-transform duration-300">
+                <div className="w-14 h-14 rounded-2xl bg-white text-slate-400 border border-slate-200 flex items-center justify-center mx-auto shadow-sm mb-3 group-hover/dropzone:text-indigo-600 group-hover/dropzone:border-indigo-200 transition-colors">
+                  <UploadCloud size={24} />
                 </div>
-
-                <h4 className="text-lg font-black text-slate-900 mb-2">
-                  Upload Your Image
-                </h4>
-
-                <p className="text-sm text-slate-500 leading-relaxed max-w-xs mx-auto">
-                  Drag and drop your image here or click
-                  to browse files from your device.
+                <h4 className="text-xs font-bold text-slate-800 mb-0.5">Pilih Gambar Projek</h4>
+                <p className="text-[10px] text-slate-400 max-w-[160px] mx-auto leading-relaxed">
+                  Ekstensi PNG, JPG atau WEBP maksimal berkas 5MB.
                 </p>
-
               </div>
             )}
 
             <input
               type="file"
-              name="image"
               accept="image/*"
               onChange={handleImageChange}
               required={!isEditing}
-              className="absolute inset-0 opacity-0 cursor-pointer"
+              className="absolute inset-0 opacity-0 cursor-pointer z-20"
             />
-
           </div>
         </div>
 
-        {/* FORM AREA */}
-        <div className="lg:col-span-3 flex flex-col justify-between space-y-6">
-
-          <div className="space-y-3">
-
-            <label className="text-xs font-bold text-slate-600 uppercase tracking-[0.2em]">
-              Project Description
+        {/* RIGHT COLUMN: TEXT CONTENT AREA */}
+        <div className="lg:col-span-3 flex flex-col h-full justify-between gap-6">
+          <div className="space-y-2.5">
+            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">
+              Deskripsi & Spesifikasi Projek
             </label>
 
             <div className="relative group">
-
-              <span className="absolute left-4 top-4 text-slate-400 group-focus-within:text-indigo-600 transition-colors">
-                <FileText size={18} />
+              <span className="absolute left-4 top-4 text-slate-400 group-focus-within:text-indigo-600 transition-colors pointer-events-none">
+                <FileText size={16} />
               </span>
 
               <textarea
-                name="description"
-                rows="10"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
                 required
-                placeholder="Write detailed information about your project, technology used, goals, and important features..."
-                defaultValue={
-                  itemToEdit?.description || ""
-                }
-                className="w-full bg-white/80 backdrop-blur border border-slate-200 rounded-3xl pl-12 pr-5 py-5 text-sm focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 transition-all text-slate-800 placeholder-slate-400 resize-none shadow-sm"
+                placeholder="Tulis informasi detail mengenai projek, tech-stack yang digunakan siswa, serta fitur-fitur utamanya..."
+                className="w-full bg-white/95 border border-slate-200 rounded-2xl pl-11 pr-5 py-4 text-xs focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/5 transition-all text-slate-800 placeholder-slate-400 resize-none min-h-[240px] shadow-sm leading-relaxed"
               />
-
             </div>
-
           </div>
 
-          {/* BUTTONS */}
-          <div className="flex items-center justify-end gap-3 pt-2">
-
+          {/* ACTION BUTTONS */}
+          <div className="flex items-center justify-end gap-2.5 pt-2">
             {isEditing && (
               <button
                 type="button"
-                onClick={onCancelEdit}
-                className="inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm px-5 py-4 rounded-2xl transition-all duration-300 active:scale-95"
+                onClick={() => {
+                  resetFormLokal();
+                  onCancelEdit();
+                }}
+                className="inline-flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] px-3.5 py-2.5 rounded-xl transition-all active:scale-95"
               >
-                <X size={16} />
-                <span>Cancel</span>
+                <X size={12} />
+                <span>Batal</span>
               </button>
             )}
 
             <button
               type="submit"
               disabled={isLoading}
-              className={`relative overflow-hidden inline-flex items-center gap-2 font-bold text-sm px-6 py-4 rounded-2xl shadow-xl transition-all duration-300 active:scale-95 text-white disabled:opacity-50 ${
+              className={`relative overflow-hidden inline-flex items-center gap-1.5 font-bold text-[11px] px-4 py-2.5 rounded-xl shadow-sm transition-all active:scale-95 text-white disabled:opacity-50 ${
                 isEditing
-                  ? "bg-gradient-to-r from-amber-500 to-orange-500 hover:scale-105"
-                  : "bg-gradient-to-r from-indigo-600 to-blue-600 hover:scale-105"
+                  ? 'bg-amber-500 hover:bg-amber-600 shadow-amber-100'
+                  : 'bg-indigo-600 hover:bg-indigo-700 shadow-indigo-100'
               }`}
             >
-
               {isLoading ? (
                 <>
-                  <svg
-                    className="animate-spin h-4 w-4 text-white"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                    />
-
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                    />
+                  <svg className="animate-spin h-3.5 w-3.5 text-white" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                   </svg>
-
-                  <span>Processing...</span>
+                  <span>Menyimpan...</span>
                 </>
               ) : (
                 <>
-                  <Check size={16} />
-                  <span>
-                    {isEditing
-                      ? "Save Changes"
-                      : "Publish Project"}
-                  </span>
+                  <Check size={12} />
+                  <span>{isEditing ? 'Simpan Perubahan' : 'Mulai Tayangkan'}</span>
                 </>
               )}
-
             </button>
-
           </div>
         </div>
 

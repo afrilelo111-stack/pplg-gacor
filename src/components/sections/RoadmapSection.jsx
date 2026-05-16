@@ -40,16 +40,8 @@ export default function RoadmapSection() {
           ))}
         </div>
 
-        {/* Footer Section Roadmap */}
-        <div className="mt-20 text-center">
-          <div className="inline-block p-[2px] rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600">
-            <div className="bg-white px-8 py-4 rounded-[14px]">
-              <p className="text-slate-900 font-bold">
-                Siap memulai perjalananmu? 🚀
-              </p>
-            </div>
-          </div>
-        </div>
+        
+
       </div>
     </section>
   );

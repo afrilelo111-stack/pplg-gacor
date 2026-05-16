@@ -13,7 +13,7 @@ export const projects = [
     id: 2,
     title: "RFID Attendance",
     description: "Smart attendance system using RFID.",
-    tech: ["IoT", "Arduino"],
+    tech: ["Laravel", "ESP32","IoT"],
     //: "/projects/rfid.png",
   },
   {
