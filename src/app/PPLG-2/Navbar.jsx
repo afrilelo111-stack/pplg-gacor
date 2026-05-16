@@ -63,8 +63,8 @@ export default function Navbar({
             className="md:hidden fixed left-1/2 z-50 bottom-6 bg-white/85 backdrop-blur-xl border border-gray-100 shadow-[0_20px_50px_rgba(0,0,0,0.1)] rounded-[2.5rem] px-6 py-3 flex gap-6 text-gray-400 items-center"
           >
             <MobileNavItem href="/" id="Home" icon={<House size={19} />} label="Home" activeTab={activeTab} setActiveTab={setActiveTab} />
-            <MobileNavItem href="/about" id="About" icon={<User size={19} />} label="About" activeTab={activeTab} setActiveTab={setActiveTab} />
-            <MobileNavItem href="/gallery" id="Gallery" icon={<ImageIcon size={19} />} label="Gallery" activeTab={activeTab} setActiveTab={setActiveTab} />
+            <MobileNavItem href="/PPLG-2/about" id="About" icon={<User size={19} />} label="About" activeTab={activeTab} setActiveTab={setActiveTab} />
+            <MobileNavItem href="/PPLG-2/gallery" id="Gallery" icon={<ImageIcon size={19} />} label="Gallery" activeTab={activeTab} setActiveTab={setActiveTab} />
             
             {/* Pembatas Garis Tipis Sebelum Tombol Musik */}
             <span className="w-[1px] h-5 bg-gray-200" />
