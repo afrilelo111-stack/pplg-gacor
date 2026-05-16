@@ -29,7 +29,7 @@ export default function Navbar({
             </span>
           </div>
 
-          {/* Menu Navigasi Desktop (Otomatis Sembunyi di HP) */}
+          {/* Menu Navigasi Desktop */}
           <div className="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
             <Link href="/" className={`transition-colors hover:text-blue-600 ${activeTab === "Home" ? "text-blue-600 font-bold" : ""}`}>Home</Link>
             <Link href="/PPLG-2/about" className={`transition-colors hover:text-blue-600 ${activeTab === "About" ? "text-blue-600 font-bold" : ""}`}>About</Link>
@@ -88,12 +88,12 @@ export default function Navbar({
   );
 }
 
-// Sub-komponen Item Navigasi Mobile (Bottom Dock)
+// Sub-komponen Item Navigasi Mobile — SEKARANG MENGGUNAKAN NEXT.JS LINK
 function MobileNavItem({ href, id, icon, label, activeTab, setActiveTab }) {
   const isActive = activeTab === id;
 
   return (
-    <a 
+    <Link 
       href={href} 
       onClick={() => setActiveTab(id)}
       className={`flex flex-col items-center gap-1 relative py-1 px-2 select-none transition-colors duration-300 ${
@@ -114,6 +114,6 @@ function MobileNavItem({ href, id, icon, label, activeTab, setActiveTab }) {
           className="absolute bottom-0 w-5 h-1 bg-blue-600 rounded-full" 
         />
       )}
-    </a>
+    </Link>
   );
 }
