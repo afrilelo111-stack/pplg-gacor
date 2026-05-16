@@ -86,7 +86,7 @@ export default function MobileNav() {
             setActiveTab={setActiveTab}
           />
           <NavItem 
-            href="#About" 
+            href="PPLG-2/about" 
             id="About" 
             icon={<User size={20} />} 
             label="About" 
