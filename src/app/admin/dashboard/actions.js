@@ -11,17 +11,29 @@ export async function addItem(formData) {
     const supabase = await createClient();
     const imageUrl = formData.get('imageUrl');
     const description = formData.get('description');
+    
+    // ─── AMBIL FIELD BARU ───
+    const kegiatan = formData.get('kegiatan');
+    const type = formData.get('type');
 
     console.log('[addItem] imageUrl:', imageUrl);
     console.log('[addItem] description:', description);
+    console.log('[addItem] kegiatan:', kegiatan);
+    console.log('[addItem] type:', type);
 
     if (!imageUrl || !description) {
       return { error: 'Gambar dan deskripsi wajib diisi.' };
     }
 
+    // Masukkan data kegiatan dan type ke dalam array insert
     const { data, error } = await supabase
       .from('items')
-      .insert([{ image_url: imageUrl, description }])
+      .insert([{ 
+        image_url: imageUrl, 
+        description: description,
+        kegiatan: kegiatan, // Masuk ke kolom 'kegiatan'
+        type: type          // Masuk ke kolom 'type'
+      }])
       .select();
 
     if (error) {
@@ -41,27 +53,43 @@ export async function addItem(formData) {
 
 // 2. UPDATE - Mengedit item yang sudah ada
 export async function updateItem(itemId, formData) {
-  const supabase = await createClient();
-  
-  const imageUrl = formData.get('imageUrl');
-  const description = formData.get('description');
+  try {
+    const supabase = await createClient();
+    
+    const imageUrl = formData.get('imageUrl');
+    const description = formData.get('description');
+    
+    // ─── AMBIL FIELD BARU UNTUK UPDATE ───
+    const kegiatan = formData.get('kegiatan');
+    const type = formData.get('type');
 
-  if (!imageUrl || !description) {
-    return { error: 'Gambar dan deskripsi wajib diisi.' };
+    if (!imageUrl || !description) {
+      return { error: 'Gambar dan deskripsi wajib diisi.' };
+    }
+
+    // Perbarui objek update agar menyertakan kegiatan dan type
+    const { error } = await supabase
+      .from('items')
+      .update({ 
+        image_url: imageUrl, 
+        description: description,
+        kegiatan: kegiatan, // Perbarui kolom 'kegiatan'
+        type: type          // Perbarui kolom 'type'
+      })
+      .eq('id', itemId);
+
+    if (error) {
+      console.error('Database update error:', error);
+      return { error: 'Gagal memperbarui data: ' + error.message };
+    }
+
+    revalidatePath('/admin/dashboard');
+    return { success: true };
+    
+  } catch (err) {
+    console.error('[updateItem] Unexpected error:', err);
+    return { error: 'Terjadi kesalahan: ' + err.message };
   }
-
-  const { error } = await supabase
-    .from('items')
-    .update({ image_url: imageUrl, description })
-    .eq('id', itemId);
-
-  if (error) {
-    console.error('Database update error:', error);
-    return { error: 'Gagal memperbarui data.' };
-  }
-
-  revalidatePath('/admin/dashboard');
-  return { success: true };
 }
 
 // 3. DELETE - Menghapus item

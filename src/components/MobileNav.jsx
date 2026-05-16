@@ -4,7 +4,7 @@ import {
   House,
   BriefcaseBusiness,
   Milestone,
-  User,
+  BookOpen,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -86,9 +86,9 @@ export default function MobileNav() {
             setActiveTab={setActiveTab}
           />
           <NavItem 
-            href="PPLG-2/about" 
+            href="/PPLG-2/about" 
             id="About" 
-            icon={<User size={20} />} 
+            icon={<BookOpen size={20} />} 
             label="About" 
             activeTab={activeTab} 
             setActiveTab={setActiveTab}

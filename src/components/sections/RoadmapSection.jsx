@@ -59,8 +59,8 @@ export default function RoadmapSection() {
             variants={itemVariants}
             className="text-4xl md:text-6xl font-black text-slate-900 mb-8 tracking-tighter"
           >
-            Start Small. <br /> 
-            <span className="text-blue-600">Build Big.</span>
+            Building<br /> 
+            <span className="text-blue-600">the Foundation.</span>
           </motion.h2>
 
           {/* Deskripsi */}
@@ -68,8 +68,7 @@ export default function RoadmapSection() {
             variants={itemVariants}
             className="text-xl text-slate-600 leading-relaxed"
           >
-            Setiap developer hebat memulai dari dasar. Ikuti kurikulum kami 
-            yang dirancang untuk mengubah pemula menjadi profesional.
+            &quot;Memahami software engineering butuh proses. Ini adalah peta jalan singkat fase fundamental yang kami lalui dalam merancang dan membangun produk digital.&quot;
           </motion.p>
         </div>
 
