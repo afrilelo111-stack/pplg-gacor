@@ -8,8 +8,8 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image"; // Impor Image untuk logo
-import Link from "next/link";   // Impor Link untuk navigasi internal Next.js
+import Image from "next/image";
+import Link from "next/link";
 
 export default function MobileNav() {
   const [show, setShow] = useState(true);
@@ -54,62 +54,69 @@ export default function MobileNav() {
     <AnimatePresence>
       {show && (
         <motion.div
-          initial={{ y: 100, x: "-50%", opacity: 0 }}
+          initial={{ y: 70, x: "-50%", opacity: 0 }}
           animate={{ y: 0, x: "-50%", opacity: 1 }}
-          exit={{ y: 100, x: "-50%", opacity: 0 }}
-          transition={{ type: "spring", stiffness: 260, damping: 30 }}
-          // Diubah px-5 agar seimbang setelah ditambah logo
-          className="md:hidden fixed left-1/2 z-50 bottom-6 bg-white/80 backdrop-blur-xl border border-gray-100 shadow-[0_20px_50px_rgba(0,0,0,0.1)] rounded-[2.5rem] px-5 py-3.5 flex items-center gap-5 text-gray-400"
+          exit={{ y: 70, x: "-50%", opacity: 0 }}
+          /* ─── PENGATURAN DURASI ULTRA-SMOOTH ─── */
+          transition={{ 
+            type: "tween", 
+            duration: 1.5,            
+            ease: [0.25, 1, 0.5, 1], 
+            delay: 0.5                
+          }}
+          className="md:hidden fixed left-1/2 z-50 bottom-6 w-[92%] max-w-max bg-white/90 backdrop-blur-xl border border-gray-100 shadow-[0_20px_50px_rgba(0,0,0,0.1)] rounded-[2.5rem] px-4 py-2.5 flex items-center justify-between gap-4 text-gray-400"
         >
-          {/* LOGO DI TARUH DI SINI (UJUNG KIRI BAR) */}
+          {/* Logo Kelas */}
           <div className="flex items-center shrink-0 pl-1">
             <Image 
               src="/logo-kelas.png" 
               alt="Logo PPLG 2"
-              width={26} // Ukuran sedikit lebih kecil dari desktop agar proporsional di HP
-              height={26}
+              width={24} 
+              height={24}
               className="object-contain drop-shadow-[0_2px_6px_rgba(59,130,246,0.15)]"
               priority
             />
           </div>
 
-          {/* Garis Pembatas Tipis Antara Logo dan Menu */}
-          <span className="w-[1px] h-5 bg-gray-200/80 shrink-0" />
+          {/* Garis Pembatas */}
+          <span className="w-[1px] h-4 bg-gray-200 shrink-0" />
 
-          {/* Daftar Navigasi Utama */}
-          <NavItem 
-            href="#Home" 
-            id="Home" 
-            icon={<House size={19} />} 
-            label="Home" 
-            activeTab={activeTab} 
-            setActiveTab={setActiveTab}
-          />
-          <NavItem 
-            href="#Projects" 
-            id="Projects" 
-            icon={<BriefcaseBusiness size={19} />} 
-            label="Projects" 
-            activeTab={activeTab} 
-            setActiveTab={setActiveTab}
-          />
-          <NavItem 
-            href="#Roadmap" 
-            id="Roadmap" 
-            icon={<Milestone size={19} />} 
-            label="Roadmap" 
-            activeTab={activeTab} 
-            setActiveTab={setActiveTab}
-          />
-          <NavItem 
-            href="/PPLG-2/about" 
-            id="About" 
-            icon={<BookOpen size={19} />} 
-            label="About" 
-            activeTab={activeTab} 
-            setActiveTab={setActiveTab}
-            isNextLink={true} // Menggunakan Next.js Link khusus halaman internal
-          />
+          {/* Menu Items */}
+          <div className="flex items-center gap-3.5">
+            <NavItem 
+              href="#Home" 
+              id="Home" 
+              icon={<House size={18} />} 
+              label="Home" 
+              activeTab={activeTab} 
+              setActiveTab={setActiveTab}
+            />
+            <NavItem 
+              href="#Projects" 
+              id="Projects" 
+              icon={<BriefcaseBusiness size={18} />} 
+              label="Projects" 
+              activeTab={activeTab} 
+              setActiveTab={setActiveTab}
+            />
+            <NavItem 
+              href="#Roadmap" 
+              id="Roadmap" 
+              icon={<Milestone size={18} />} 
+              label="Roadmap" 
+              activeTab={activeTab} 
+              setActiveTab={setActiveTab}
+            />
+            <NavItem 
+              href="/PPLG-2/about" 
+              id="About" 
+              icon={<BookOpen size={18} />} 
+              label="About" 
+              activeTab={activeTab} 
+              setActiveTab={setActiveTab}
+              isNextLink={true}
+            />
+          </div>
         </motion.div>
       )}
     </AnimatePresence>
@@ -118,8 +125,8 @@ export default function MobileNav() {
 
 function NavItem({ href, id, icon, label, activeTab, setActiveTab, isNextLink = false }) {
   const isActive = activeTab === id;
-  const itemClass = `flex flex-col items-center gap-1 relative py-1 px-1.5 select-none transition-colors duration-300 ${
-    isActive ? "text-blue-600 font-bold" : "hover:text-gray-600"
+  const itemClass = `flex flex-col items-center gap-0.5 relative py-1 px-1 select-none transition-colors duration-300 ${
+    isActive ? "text-blue-600 font-bold" : "text-gray-400 hover:text-gray-600"
   }`;
 
   const content = (
@@ -132,13 +139,12 @@ function NavItem({ href, id, icon, label, activeTab, setActiveTab, isNextLink = 
         <motion.span 
           layoutId="activeGlowMobile" 
           transition={{ type: "spring", stiffness: 380, damping: 30 }}
-          className="absolute bottom-0 w-4 h-1 bg-blue-600 rounded-full" 
+          className="absolute bottom-0 w-4 h-[3px] bg-blue-600 rounded-full" 
         />
       )}
     </>
   );
 
-  // Jika halaman internal (seperti About), render menggunakan Next.js Link
   if (isNextLink) {
     return (
       <Link href={href} onClick={() => setActiveTab(id)} className={itemClass}>
@@ -147,7 +153,6 @@ function NavItem({ href, id, icon, label, activeTab, setActiveTab, isNextLink = 
     );
   }
 
-  // Jika section id biasa (seperti #Home), gunakan anchor tag biasa
   return (
     <a href={href} onClick={() => setActiveTab(id)} className={itemClass}>
       {content}
