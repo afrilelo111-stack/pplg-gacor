@@ -42,7 +42,7 @@ const TIMELINE_DATA = [
   }
 ];
 
-const CATEGORIES = ["Semua", "Project", "Classmeet", "Formal", "Nongkrong"];
+const CATEGORIES = ['Project', 'Tiktok', 'Formal', 'Rendom', 'boys!!','girls!!'];
 
 export default function AboutPPLG2() {
   const [items, setItems] = useState([]);

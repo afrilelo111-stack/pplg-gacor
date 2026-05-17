@@ -11,10 +11,12 @@ const supabase = createClient();
 // Daftar Kegiatan / Sorotan ala Kapsul Waktu (Warna Indigo diganti ke Blue)
 const HIGHLIGHTS = [
   { id: "all", name: "Semua", emoji: "✨", color: "from-blue-500 to-cyan-600" },
-  { id: "project", name: "Project", emoji: "💻", color: "from-blue-600 to-sky-600" },
-  { id: "classmeet", name: "Classmeet", emoji: "🏆", color: "from-amber-500 to-orange-600" },
-  { id: "formal", name: "Formal", emoji: "👔", color: "from-slate-700 to-slate-900" },
-  { id: "nongkrong", name: "Nongkrong", emoji: "☕", color: "from-teal-500 to-emerald-600" },
+  { id: "project", name: "Project", color: "from-blue-600 to-sky-600" },
+  { id: "Tiktok", name: "Tiktok", color: "from-amber-500 to-orange-600" },
+  { id: "formal", name: "Formal", color: "from-slate-700 to-slate-900" },
+  { id: "Rendom", name: "Rendom", color: "from-teal-500 to-emerald-600" },
+  { id: "boys!!", name: "boys!!", color: "from-teal-500 to-emerald-600" },
+  { id: "girls!!", name: "girls!!", color: "from-teal-500 to-emerald-600" },
 ];
 
 export default function GalleryPPLG2() {

@@ -17,7 +17,7 @@ import {
   Layers,
 } from 'lucide-react';
 
-const KEGIATAN_OPTIONS = ['Project', 'Classmeet', 'Formal', 'Nongkrong'];
+const KEGIATAN_OPTIONS = ['Project', 'Tiktok', 'Formal', 'Rendom', 'boys!!','girls!!'];
 
 export default function ItemForm({
   itemToEdit = null,
