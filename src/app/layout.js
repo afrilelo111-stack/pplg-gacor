@@ -2,7 +2,7 @@ import { MusicProvider } from "@/components/MusicProvider"; // Sesuaikan path fo
 import "./globals.css"; // CSS global Anda
 
 export const metadata = {
-  title: "Kapsul Waktu PPLG 2",
+  title: "PPLG 2 - Memori dan Kenangan",
   description: "Memori dan kenangan berharga kelas PPLG 2",
 };
 

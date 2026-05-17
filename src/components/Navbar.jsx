@@ -16,7 +16,7 @@ export default function Navbar() {
     const timer = setTimeout(() => {
       setIsReady(true);
       setShow(true);
-    }, 2500); 
+    }, 1500); 
 
     let lastScroll = 0;
 
@@ -34,7 +34,7 @@ export default function Navbar() {
       lastScroll = currentScroll;
 
       const sections = ["Home", "Projects", "Roadmap"];
-      const scrollPosition = currentScroll + 200;
+      const scrollPosition = currentScroll + 230;
 
       sections.forEach((id) => {
         const element = document.getElementById(id);

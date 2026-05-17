@@ -25,19 +25,19 @@ const TIMELINE_DATA = [
   {
     year: "Awal Masuk",
     title: "Inisialisasi Sintaks Kelas",
-    desc: "Momen pertama kali menginjakkan kaki di lab. Belum saling kenal, laptop masih kosongan, dan masih bingung bedanya HTML sama bahasa pemrograman.",
+    desc: "Momen pertama kali maso di lab. Belum ada yang baku kenal, masih bingo apa depe beda HTML deng bahasa pemrograman.",
     tag: "Chapter 01"
   },
   {
     year: "Pertengahan",
-    title: "Begadang & Project Pertama",
-    desc: "Mulai masuk ke algoritma berat dan framework. Di sinilah masa-masa grup WhatsApp penuh dengan screenshot error dan kopi mulai jadi sahabat karib.",
+    title: "Begadang & Project Berat",
+    desc: "so mulai maso di algoritma berat deng Laravel. Di sini itu masa-masa grup WhatsApp fol deng tugas praktek, error so jadi tamang hari-hari",
     tag: "Chapter 02"
   },
   {
     year: "Akhir Cerita",
     title: "Final Deploy: Kelulusan",
-    desc: "Project akhir selesai diperiksa. Kita mengompilasi semua memori, bersiap melakukan 'push' terakhir ke dunia industri dan universitas impian.",
+    desc: "Project akhir so kelar dapa periksa, tanda torang so musti babak baru. Simpan jo samua kenangan manis di lab, sekarang siap-siap mo baku dapa deng dunia kerja ato kampus impian.",
     tag: "Success"
   }
 ];
