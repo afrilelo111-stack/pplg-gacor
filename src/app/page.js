@@ -121,6 +121,7 @@ export default function HomePage() {
           </motion.div>
         )}
       </AnimatePresence>
+      <Navbar />
       <MobileNav />
     </>
   );
