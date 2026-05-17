@@ -62,7 +62,7 @@ export default function MobileNav() {
             type: "tween", 
             duration: 1.5,            
             ease: [0.25, 1, 0.5, 1], 
-            delay: 0.5                
+            delay: 0.6                
           }}
           className="md:hidden fixed left-1/2 z-50 bottom-6 w-[92%] max-w-max bg-white/90 backdrop-blur-xl border border-gray-100 shadow-[0_20px_50px_rgba(0,0,0,0.1)] rounded-[2.5rem] px-4 py-2.5 flex items-center justify-between gap-4 text-gray-400"
         >

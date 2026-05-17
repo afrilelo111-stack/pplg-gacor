@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { House, BookOpen, Image as ImageIcon, Volume2, VolumeX } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image"; // 🚀 Impor Image dari Next.js
 
 export default function Navbar({ 
   showMobileNav, 
@@ -14,18 +15,27 @@ export default function Navbar({
 }) {
   return (
     <>
-      {/* ─── 1. NAVBAR DESKTOP (TAMPILAN ATAS) ─── */}
+      {/* ─── 1. NAVBAR DESKTOP (TAMPILAN ATAS) W/ IMAGE LOGO ─── */}
       <nav className={`fixed top-0 inset-x-0 z-40 transition-all duration-300 ${
         isScrolled ? "bg-white/80 backdrop-blur-md shadow-sm border-b border-slate-100 py-4" : "bg-transparent py-6"
       }`}>
         <div className="max-w-6xl mx-auto px-4 md:px-6 flex items-center justify-between">
-          {/* Logo / Identitas Kelas */}
-          <div className="flex items-center gap-2 select-none">
-            <span className="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center text-white font-black text-xs shadow-md shadow-blue-200">
-              P2
-            </span>
+          
+          {/* IDENTITAS KELAS (LOGO GAMBAR) */}
+          <div className="flex items-center gap-3 select-none">
+            {/* 🚀 PERBAIKAN: Mengganti bulatan "P2" menjadi logo kelas asli */}
+            <div className="relative w-8 h-8 flex items-center justify-center">
+              <Image 
+                src="/logo-kelas.png" 
+                alt="Logo PPLG 2"
+                width={32} 
+                height={32}
+                className="object-contain drop-shadow-[0_2px_8px_rgba(59,130,246,0.2)]"
+                priority
+              />
+            </div>
             <span className="font-black text-slate-900 tracking-tight text-sm md:text-base">
-              PPLG <span className="text-blue-600">2</span>
+              PPLG <span className="text-blue-600">Twogether</span>
             </span>
           </div>
 
@@ -52,7 +62,7 @@ export default function Navbar({
         </div>
       </nav>
 
-      {/* ─── 2. MOBILE NAVIGATION (BOTTOM DOCK) ─── */}
+      {/* ─── 2. MOBILE NAVIGATION (BOTTOM DOCK) BROWSER ASLI ─── */}
       <AnimatePresence>
         {showMobileNav && (
           <motion.div
@@ -88,7 +98,7 @@ export default function Navbar({
   );
 }
 
-// Sub-komponen Item Navigasi Mobile — SEKARANG MENGGUNAKAN NEXT.JS LINK
+// Sub-komponen Item Navigasi Mobile
 function MobileNavItem({ href, id, icon, label, activeTab, setActiveTab }) {
   const isActive = activeTab === id;
 
