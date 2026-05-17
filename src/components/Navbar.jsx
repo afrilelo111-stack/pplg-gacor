@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-
+import Image from "next/image"; // Impor komponen Image dari Next.js
 
 export default function Navbar() {
   return (
@@ -15,10 +15,21 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-5">
 
-        {/* Logo */}
-        <h1 className="text-2xl font-black text-slate-900">
-          PPLG<small className="text-blue-600">Twogether</small>
-        </h1>
+        {/* Logo & Identitas Kelas */}
+        <div className="flex items-center gap-3 select-none">
+          {/* Komponen Gambar Logo */}
+          <Image 
+            src="/logo-kelas.png" // Memakai file logo yang sama di folder public
+            alt="Logo PPLG 2"
+            width={32} // Menyesuaikan tinggi teks navbar (~2xl)
+            height={32}
+            className="object-contain drop-shadow-[0_2px_8px_rgba(59,130,246,0.2)]"
+            priority
+          />
+          <h1 className="text-2xl font-black text-slate-900 tracking-tight">
+            PPLG<small className="text-blue-600 font-black text-2xl">Twogether</small>
+          </h1>
+        </div>
 
         {/* Desktop Menu */}
         <ul className="flex gap-8 text-gray-700 font-medium">
