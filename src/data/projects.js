@@ -6,7 +6,7 @@ export const projects = [
     title: "Laporan Web App",
     description: "Web aplikasi laporan .",
     tech: ["Laravel", "MySQL"],
-    //: "/projects/laporan.png",
+    image: "/projects/laporan.png",
     link: "https://laporaja.page.gd/?i=1"
   },
   {
@@ -14,13 +14,13 @@ export const projects = [
     title: "RFID Attendance",
     description: "Smart attendance system using RFID.",
     tech: ["Laravel", "ESP32","IoT"],
-    //: "/projects/rfid.png",
+    //image: "/projects/rfid.png",
   },
   {
     id: 3,
     title: "Photo Booth App",
     description: "Interactive photo booth with JavaScript.",
     tech: ["JavaScript", "Camera API"],
-    //: "/projects/photo-booth.png",
+    //image: "/projects/photo-booth.png",
   },
 ];
