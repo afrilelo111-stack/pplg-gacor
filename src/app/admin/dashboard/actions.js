@@ -21,7 +21,7 @@ export async function addItem(formData) {
     console.log('[addItem] kegiatan:', kegiatan);
     console.log('[addItem] type:', type);
 
-    if (!imageUrl || !description) {
+    if (!imageUrl) {
       return { error: 'Gambar dan deskripsi wajib diisi.' };
     }
 
