@@ -278,7 +278,7 @@ export default function ItemForm({
               <textarea
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                required
+                
                 placeholder="Tulis detail memori, deskripsi karya siswa, atau rangkuman keseruan momen yang tertangkap lensa kamera..."
                 className="w-full bg-white border border-slate-200 rounded-2xl pl-11 pr-5 py-4 text-xs font-medium focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/5 transition-all text-slate-800 placeholder-slate-400 resize-none min-h-[175px] shadow-xs leading-relaxed"
               />
