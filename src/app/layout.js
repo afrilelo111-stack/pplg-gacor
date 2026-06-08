@@ -2,13 +2,16 @@ import { MusicProvider } from "@/components/MusicProvider"; // Sesuaikan path fo
 import "./globals.css"; // CSS global Anda
 
 export const metadata = {
-  title: "PPLG SMK Negeri 3 Manado",
+  title: "PPLG SMK Negeri 3 Manado | Proyek, Kegiatan, dan Informasi Jurusan",
   description:
-    "Website jurusan PPLG SMK Negeri 3 Manado. Informasi siswa, guru, proyek, dan kegiatan.",
+    "Website resmi jurusan Pengembangan Perangkat Lunak dan Gim (PPLG) SMK Negeri 3 Manado. Temukan proyek siswa, kegiatan, galeri, dan informasi jurusan.",
   openGraph: {
     title: "PPLG SMK Negeri 3 Manado",
-    description: "Website resmi jurusan PPLG",
+    description:
+      "Website resmi jurusan PPLG SMK Negeri 3 Manado",
     images: ["/og-image.jpg"],
+    type: "website",
+    locale: "id_ID",
   },
 };
 

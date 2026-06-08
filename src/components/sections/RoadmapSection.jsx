@@ -59,8 +59,8 @@ export default function RoadmapSection() {
             variants={itemVariants}
             className="text-4xl md:text-6xl font-black text-slate-900 mb-8 tracking-tighter"
           >
-            Building<br /> 
-            <span className="text-blue-600">the Foundation.</span>
+            Roadmap<br /> 
+            <span className="text-blue-600">Belajar Web Development.</span>
           </motion.h2>
 
           {/* Deskripsi */}

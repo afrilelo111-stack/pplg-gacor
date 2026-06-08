@@ -2,9 +2,8 @@ import AboutClient from "./AboutClient";
 
 export const metadata ={
 
-  title: "Kenagan PPLG 2",
-  description: "Semua Kenagan PPLG 2 ada di sini. Foto, video, cerita, dan nostalgia perjalanan kelas yang penuh warna. Klik untuk bernostalgia!",
-  
+  title: "Kenangan PPLG 2",
+description: "Dokumentasi kenangan kelas PPLG 2 berupa foto, video, cerita, dan momen perjalanan belajar selama masa sekolah."
 }
 
 export default function Page() {

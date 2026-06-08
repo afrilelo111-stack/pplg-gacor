@@ -101,7 +101,6 @@ export default function HomePage() {
                 <div className="absolute bottom-[10%] right-[-5%] w-[250px] md:w-[400px] h-[250px] md:h-[400px] bg-indigo-300/10 blur-[80px] md:blur-[100px] rounded-full" />
               </div>
 
-              <Navbar />
               
               <div id="Home" className="relative z-10">
                 <Hero />
