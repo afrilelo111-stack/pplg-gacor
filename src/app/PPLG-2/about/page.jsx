@@ -10,6 +10,11 @@ import {
   Sparkles, Calendar, Layers, Terminal, Image as ImageIcon, Video as VideoIcon 
 } from "lucide-react";
 
+export const metadata ={
+  title: "Kenagan PPLG 2",
+  description: "Semua Kenagan PPLG 2"
+}
+
 const supabase = createClient();
 
 const NOSTALGIA_QUOTES = [

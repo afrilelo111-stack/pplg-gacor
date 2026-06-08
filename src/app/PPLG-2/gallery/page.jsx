@@ -6,6 +6,11 @@ import Image from "next/image";
 import { useMusic } from "@/components/MusicProvider"; 
 import { Maximize2, X, Play, Video, ChevronLeft, ChevronRight, Terminal, Database, HardDrive, Layers } from "lucide-react";
 
+export const metadata = {
+  title: "Gallery PPLG 2 - Dokumentasi Visual Kelas",
+  description: "Kumpulan dokumentasi visual kegiatan kelas PPLG 2. Proyek, momen, dan sorotan perjalanan belajar.",
+}
+
 const supabase = createClient();
 
 // Daftar Kegiatan / Sorotan ala Kapsul Waktu (Warna Indigo diganti ke Blue)

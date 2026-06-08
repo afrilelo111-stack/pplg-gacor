@@ -2,8 +2,14 @@ import { MusicProvider } from "@/components/MusicProvider"; // Sesuaikan path fo
 import "./globals.css"; // CSS global Anda
 
 export const metadata = {
-  title: "PPLG 2 - Memori dan Kenangan",
-  description: "Memori dan kenangan berharga kelas PPLG 2",
+  title: "PPLG SMK Negeri 3 Manado",
+  description:
+    "Website jurusan PPLG SMK Negeri 3 Manado. Informasi siswa, guru, proyek, dan kegiatan.",
+  openGraph: {
+    title: "PPLG SMK Negeri 3 Manado",
+    description: "Website resmi jurusan PPLG",
+    images: ["/og-image.jpg"],
+  },
 };
 
 export default function RootLayout({ children }) {
