@@ -60,7 +60,7 @@ export default function Hero() {
           variants={itemVariants}
           className="text-5xl md:text-7xl font-extrabold leading-[1.1] tracking-tighter mb-8 text-slate-900"
         >
-          PPLG SMK Negeri 3 Manado Bukan <br /> Sekadar 
+          PPLG Bukan <br /> Sekadar 
           <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent"> Belajar Coding.</span>
         </motion.h1>
 
@@ -69,11 +69,8 @@ export default function Hero() {
           variants={itemVariants}
           className="text-xl text-slate-600 leading-relaxed mb-10 max-w-lg"
         >
-          Jurusan Pengembangan Perangkat Lunak dan Gim (PPLG)
-          SMK Negeri 3 Manado berfokus pada pengembangan website,
-          aplikasi, database, UI/UX, dan teknologi digital modern.
-          Melalui proyek nyata, siswa belajar membangun solusi
-          digital dari tahap perencanaan hingga implementasi
+          Bangun project nyata, eksplorasi teknologi modern, dan pelajari
+          bagaimana software dibuat dari ide menjadi produk digital.
         </motion.p>
 
         {/* Tombol Interaktif */}
