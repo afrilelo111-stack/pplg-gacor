@@ -5,7 +5,7 @@ export const metadata = {
   title: "PPLG Twogether | Proyek dan Portofolio Siswa",
   description:
     " Kumpulan proyek, galeri, roadmap belajar, dan aktivitas siswa PPLG.",
-    title: "PPLG SMK Negeri 3 Manado",
+    title: "PPLG Twogether | Proyek dan Portofolio Siswa",
     description:
       "Website PPLG Twogether",
     images: ["/og-image.jpg"],
