@@ -7,7 +7,7 @@ export const metadata = {
     " Komunitas dan portofolio siswa PPLG yang membangun proyek digital dan mempelajari teknologi modern.",
     title: "PPLG SMK Negeri 3 Manado",
     description:
-      "Website resmi jurusan PPLG SMK Negeri 3 Manado",
+      "Website PPLG Twogether",
     images: ["/og-image.jpg"],
     type: "website",
     locale: "id_ID",
