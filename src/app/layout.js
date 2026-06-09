@@ -2,9 +2,9 @@ import { MusicProvider } from "@/components/MusicProvider"; // Sesuaikan path fo
 import "./globals.css"; // CSS global Anda
 
 export const metadata = {
-  title: "PPLG Twogether",
+  title: "PPLG Twogether | Proyek dan Portofolio Siswa",
   description:
-    " Komunitas dan portofolio siswa PPLG yang membangun proyek digital dan mempelajari teknologi modern.",
+    " Kumpulan proyek, galeri, roadmap belajar, dan aktivitas siswa PPLG.",
     title: "PPLG SMK Negeri 3 Manado",
     description:
       "Website PPLG Twogether",
