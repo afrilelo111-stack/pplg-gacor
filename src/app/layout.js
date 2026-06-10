@@ -2,17 +2,19 @@ import { MusicProvider } from "@/components/MusicProvider"; // Sesuaikan path fo
 import "./globals.css"; // CSS global Anda
 
 export const metadata = {
-  title: "PPLG 2 SMK 3 manado | Proyek dan Portofolio Siswa",
+  title: "PPLG 2 SMK Negeri 3 Manado | Proyek dan Portofolio Siswa",
   description:
-    " Kumpulan proyek, galeri, roadmap belajar, dan aktivitas siswa PPLG.",
-    title: "PPLG 2 SMK 3 manado | Proyek dan Portofolio Siswa",
+    "Kumpulan proyek, portofolio, galeri kegiatan, dan roadmap belajar siswa PPLG 2 SMK Negeri 3 Manado.",
+
+  openGraph: {
+    title: "PPLG 2 SMK Negeri 3 Manado | Proyek dan Portofolio Siswa",
     description:
-      "Website PPLG 2 SMK 3 manado",
+      "Kumpulan proyek, portofolio, galeri kegiatan, dan roadmap belajar siswa PPLG 2 SMK Negeri 3 Manado.",
     images: ["/og-image.jpg"],
     type: "website",
     locale: "id_ID",
-  };
-
+  },
+};
 export default function RootLayout({ children }) {
   return (
     <html lang="id">
