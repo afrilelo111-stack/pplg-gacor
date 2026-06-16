@@ -7,7 +7,7 @@ export const metadata = {
     "Kumpulan proyek, portofolio, galeri kegiatan, dan roadmap belajar siswa PPLG 2 SMK Negeri 3 Manado.",
 
   openGraph: {
-    title: "PPLG 2 SMK Negeri 3 Manado | Proyek dan Portofolio Siswa",
+    title: "PPLG SMK Negeri 3 Manado | Proyek dan Portofolio Siswa",
     description:
       "Kumpulan proyek, portofolio, galeri kegiatan, dan roadmap belajar siswa PPLG 2 SMK Negeri 3 Manado.",
     images: ["/og-image.jpg"],
