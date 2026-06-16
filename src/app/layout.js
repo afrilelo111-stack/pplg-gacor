@@ -2,7 +2,7 @@ import { MusicProvider } from "@/components/MusicProvider"; // Sesuaikan path fo
 import "./globals.css"; // CSS global Anda
 
 export const metadata = {
-  title: "PPLG 2 SMK Negeri 3 Manado | Proyek dan Portofolio Siswa",
+  title: "PPLG SMK Negeri 3 Manado | Proyek dan Portofolio Siswa",
   description:
     "Kumpulan proyek, portofolio, galeri kegiatan, dan roadmap belajar siswa PPLG 2 SMK Negeri 3 Manado.",
 
